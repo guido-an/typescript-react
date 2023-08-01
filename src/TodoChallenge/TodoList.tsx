@@ -4,17 +4,18 @@ import { TodoItem } from './TodoItem';
 
 interface TodoListProps {
     todolist: Todo[],
-    handleDeleteTodo: Function
+    handleDeleteTodo: Function,
+    handleCompleted: Function
 }
 
-const displayList = (array: Todo[], handleDeleteTodo: Function) => {
+const displayList = (array: Todo[], handleDeleteTodo: Function, handleCompleted: Function) => {
     return array.map(todo => {
-        return <TodoItem key={todo.id} todo={todo} handleDeleteTodo={handleDeleteTodo}/>
+        return <TodoItem key={todo.id} todo={todo} handleDeleteTodo={handleDeleteTodo} handleCompleted={handleCompleted}/>
     })
 }
 
-export const TodoList: React.FC<TodoListProps> = ({ todolist, handleDeleteTodo }) => {  
+export const TodoList: React.FC<TodoListProps> = ({ todolist, handleDeleteTodo, handleCompleted }) => {  
     return (
-        <>{displayList(todolist, handleDeleteTodo)}</>
+        <>{displayList(todolist, handleDeleteTodo, handleCompleted)}</>
     )
 }

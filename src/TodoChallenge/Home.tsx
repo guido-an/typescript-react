@@ -4,19 +4,27 @@ import { Todo } from './types'
 import { AddNewTodo } from './AddNewTodo';
 
 
-let todos: Todo[] = [ 
-    { title: 'First to do', id: 1 },
-    { title: 'Second to do', id: 2 },
-    { title: 'Third to do', id: 3 }
-]
 export const Home: React.FC = () => {
-    const [todosList, setTodosList] = useState<Todo[]>(todos);
+  const savedTodosList = localStorage.getItem("todosList");
+  const todosListInStorage = savedTodosList ? JSON.parse(savedTodosList) : [];
+    
+    const [todosList, setTodosList] = useState<Todo[]>(todosListInStorage);
     const [nextId, setNextId] = useState<number>(todosList.length + 1);
+
+    useEffect(() => {
+      localStorage.setItem("todosList", JSON.stringify(todosList));
+      console.log(todosList, 'rendering')
+     }, [todosList])
+
+     useEffect(() => {
+
+     }, [])
   
     function addNewTodo(title: string) {
       const newTodo = {
         title,
         id: nextId,
+        completed: false
       };
       setNextId((prevId) => prevId + 1); 
       setTodosList([...todosList, newTodo]);
@@ -30,10 +38,20 @@ export const Home: React.FC = () => {
         setNextId((prevId) => prevId - 1); 
     }
 
+    function handleCompleted(todoId: number){
+      const savedTodosList = localStorage.getItem("todosList");
+      const myList = JSON.parse(savedTodosList!);   
+      const myTodo =  myList[todoId - 1]
+      myTodo.completed = !myTodo.completed
+      localStorage.setItem("todosList", JSON.stringify(myList));
+      setTodosList([...myList]);
+
+  }
+
     return (
       <div>
         <h1>TO DO LIST CHALLENGE</h1>
-        <TodoList todolist={todosList} handleDeleteTodo={handleDeleteTodo} />
+        <TodoList todolist={todosList} handleDeleteTodo={handleDeleteTodo} handleCompleted={handleCompleted} />
         <AddNewTodo addNewTodo={addNewTodo} />
       </div>
     );

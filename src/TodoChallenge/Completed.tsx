@@ -1,14 +1,15 @@
 import React from 'react'
 
 interface CompletedProps {
-    setCompleted: Function,
-    completed: boolean
+    todoId: number,
+    handleCompleted: Function
 }
 
-export const Completed: React.FC<CompletedProps> = ({ setCompleted, completed }) => {
+export const Completed: React.FC<CompletedProps> = ({ todoId, handleCompleted }) => {
+
     return(
         <div>
-            <button onClick={() => setCompleted(!completed)}>completed</button>
+            <button onClick={() => handleCompleted(todoId)}>completed</button>
         </div>
     )
 }
