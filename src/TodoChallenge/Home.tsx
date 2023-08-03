@@ -13,13 +13,9 @@ export const Home: React.FC = () => {
 
     useEffect(() => {
       localStorage.setItem("todosList", JSON.stringify(todosList));
-      console.log(todosList, 'rendering')
      }, [todosList])
 
-     useEffect(() => {
 
-     }, [])
-  
     function addNewTodo(title: string) {
       const newTodo = {
         title,
@@ -36,6 +32,7 @@ export const Home: React.FC = () => {
         })
         setTodosList([...updatedList]);
         setNextId((prevId) => prevId - 1); 
+        localStorage.setItem("todosList", JSON.stringify(updatedList));
     }
 
     function handleCompleted(todoId: number){
@@ -45,7 +42,6 @@ export const Home: React.FC = () => {
       myTodo.completed = !myTodo.completed
       localStorage.setItem("todosList", JSON.stringify(myList));
       setTodosList([...myList]);
-
   }
 
     return (

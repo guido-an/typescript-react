@@ -4,8 +4,8 @@ import { TodoItem } from './TodoItem';
 
 interface TodoListProps {
     todolist: Todo[],
-    handleDeleteTodo: Function,
-    handleCompleted: Function
+    handleDeleteTodo: (id: number) => void,
+    handleCompleted: (todoId: number) => void
 }
 
 const displayList = (array: Todo[], handleDeleteTodo: Function, handleCompleted: Function) => {
