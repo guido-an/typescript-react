@@ -2,11 +2,11 @@ import React from 'react'
 import { User } from './types'
 import { UserCard } from './UserCard'
 
-interface UserListProps {
-    usersList: User[]
+interface UserListProps<T> {
+    usersList: T
 }
 
-export const UserList: React.FC<UserListProps> = ({ usersList }) => {
+export const UserList: React.FC<UserListProps<User[]>> = ({ usersList }) => {
     return(
         <>
           {usersList.map(user => {

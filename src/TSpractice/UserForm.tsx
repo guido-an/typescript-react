@@ -1,20 +1,12 @@
 import React, { ChangeEvent, useState, FormEvent } from 'react'
 import { User } from './types'
 
-interface UserFormProps {
-    user?: User,
+interface UserFormProps<T> {
+    user?: T,
     onSubmit: (user: User, event: FormEvent<HTMLFormElement>) => void
 }
 
-// export interface User {
-//     id: number,
-//     name: string,
-//     email: string,
-//     age: number,
-//     isAdmin: boolean
-// }
-
-export const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
+export const UserForm: React.FC<UserFormProps<User>> = ({ onSubmit }) => {
     const [user, setUser] = useState<User>({
         id: '',
         name: '',
